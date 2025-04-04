@@ -130,8 +130,12 @@ def find_arbitrage_opportunities(assets):
         net_profit = gross_spread - fee_cost
 
         if net_profit > 0:
-            rows.append([asset,buy_exchange,f"{lowest_ask:,.4f}",sell_exchange,f"{highest_bid:,.4f}",f"{net_profit:,.4f}",color_spread(net_profit)])
-        log_opportunity_to_csv(asset, buy_exchange, lowest_ask, sell_exchange, highest_bid, net_profit)
+            rows.append([
+                asset, buy_exchange, f"{lowest_ask:,.4f}",
+                sell_exchange, f"{highest_bid:,.4f}",
+                f"{net_profit:,.4f}", color_spread(net_profit)
+            ])
+            log_opportunity_to_csv(asset, buy_exchange, lowest_ask, sell_exchange, highest_bid, net_profit)
 
     if rows:
         print(tabulate(rows, headers=["Asset", "Buy @", "Ask", "Sell @", "Bid", "Net $", "Net Spread"], tablefmt="fancy_grid"))
